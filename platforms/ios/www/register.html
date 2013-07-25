@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title></title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>ShowKit-PhoneGapPlugin</h1>
+            
+        </div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/ShowKit.js"></script>
+        
+        <script type="text/javascript">
+            function connectionStateChanged(state)
+            {
+                if (state.value == "SHKConnectionStatusCallTerminated"){
+                }else if(state.value == "SHKConnectionStatusInCall"){
+                }else if(state.value == "SHKConnectionStatusLoggedIn"){
+                    window.location.href = 'dashboard.html';
+                }else if(state.value == "SHKConnectionStatusNotConnected"){
+                }else if(state.value == "SHKConnectionStatusLoginFailed"){
+                }else if(state.value == "SHKConnectionStatusCallIncoming"){
+                }
+            }
+            
+            function register(){
+                var username = document.forms["login_form"]["username"].value;
+                var password = document.forms["login_form"]["pwd"].value;
+                ShowKit.registerUser(function(value){
+                                     var username = value[0];
+                                     var error = value[1];
+                                     if (error == null){
+                                     console.log("successfully registered: "+username);
+                                     ShowKit.login(username,password);
+                                     }else
+                                     {
+                                     console.log("error="+error);
+                                     }},username, password);
+            }
+            
+            </script>
+        
+        <h1> Registration </h1>
+        
+        <br><br>
+        
+        <form name="login_form">
+            Username: <input type="username" name="username" autocorrect="off" autocapitalize="off"><br>
+            Password: <input type="password" name="pwd">
+        </form>
+        
+        <br><br>
+        
+        <button onclick="register()">register</button>
+        
+        <br><br><br><br><br>
+        
+        <FORM><INPUT Type="button" VALUE="Back" onClick="window.location.href='index.html'"></FORM>
+    </body>
+</html>
