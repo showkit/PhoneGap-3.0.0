@@ -21,14 +21,14 @@ Integrate video chat into your phonegap web app in less than 10 minutes!
 
   * Download the latest [ShowKit.framework](http://www.showkit.com/releases).
   * Drag ShowKit.framework into your project
-    ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step1.png)
+    ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step1.png
 
   * Make sure you check 'Copy items into destination group's folder (if needed)' and 'Add to targets'
-    ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step2.png)
+    ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step2.png)
 
     
   * Select your project in the Project Navigator => 'Build Phases' => 'Link Binary With Library' => press '+' to add more frameworks and libraries...
-    ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step3.png)
+    ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step3.png)
 
     * You need all of the following libraries
       * OpenGLES.framework
@@ -46,20 +46,21 @@ Integrate video chat into your phonegap web app in less than 10 minutes!
 ###Step 2. Add ShowKit-PhoneGapPlugin to your Project
    * ``git clone git@github.com:showkit/PhoneGap.git``
    * Drag the ShowKitPlugin into the 'Plugins' folder and copy the Showkit.js into the '/www/js' folder.
-     ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step4.png)
+     ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step4.png)
    * Add the following line to the config.xml.
      * ``    <feature name="ShowKitPlugin">
         <param name="ios-package" value="ShowKitPlugin" />
-    </feature>`` 
+    </feature>``
+       ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step7.png)
    * Initialize the app with your ShowKit api key in index.js
      * ``ShowKit.initializeShowKit(apiKey);``
-       ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step5.png)
+       ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step5.png)
    * Import ShowKit.js on any html where you will use ShowKit.
      * ``<script type="text/javascript" src="js/ShowKit.js"></script>``
 
 ###Step 3. Configure the Other Linker Flag
    * Add ``-lc++`` to your Other Linker Flags
-     ![ScreenShot](https://raw.github.com/showkit/PhoneGap/master/www/img/phonegap_step6.png)
+     ![ScreenShot](https://raw.github.com/showkit/PhoneGap-3.0.0/master/www/img/phonegap_step6.png)
 
 ###Congratulations! Your Project is now ShowKit enabled. You can build and run your project.
 
