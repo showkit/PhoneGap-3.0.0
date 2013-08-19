@@ -16,7 +16,7 @@
 - (void)initializeShowKit:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-
+    
     API_KEY = [[NSString alloc] initWithString:(NSString *)[command.arguments objectAtIndex:0]];
     
     [self setupConferenceUIViews];
@@ -32,7 +32,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SHKConnectionStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SHKUserMessageReceivedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SHKRemoteClientStateChangedNotification object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStateChanged:) name:SHKConnectionStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userMessageReceived:) name:SHKUserMessageReceivedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteClientStatusChanged:) name:SHKRemoteClientStateChangedNotification object:nil];
@@ -298,7 +298,7 @@
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device does not support torch mode" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-//            [alert release];
+            //            [alert release];
         }
     }
 }
@@ -318,49 +318,54 @@
         [self.mainVideoUIView setHidden:YES];
         [self.prevVideoUIView setHidden:YES];
         [self.menuUIView setHidden:YES];
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if([value isEqualToString:SHKConnectionStatusCallTerminating])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusInCall])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusLoggedIn])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusNotConnected])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusLoginFailed])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, error.code, error.localizedDescription]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, error.code, error.localizedDescription] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusCallIncoming])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, callee, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, callee, NULL, NULL] waitUntilDone:NO];
         
     } else if([value isEqualToString:SHKConnectionStatusCallOutgoing])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value, NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if([value isEqualToString:SHKConnectionStatusCallFailed])
     {
         
-        [self writeJavascript:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, error.code, error.localizedDescription]];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, error.code, error.localizedDescription] waitUntilDone:NO];
         
     }
+}
+
+- (void) executeJavascriptOnMainThread:(NSString *) javascript
+{
+    [self writeJavascript:javascript];
 }
 
 - (void) userMessageReceived: (NSNotification*) n
@@ -373,9 +378,8 @@
     v = (NSData*)s.Value;
     msg = [self NSDataToNSDictionary:v];
     __block NSString  * message = [msg objectForKey:@"msg"];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self writeJavascript:[NSString stringWithFormat:@"userMessageReceived('%@')", message]];
-    });
+    
+    [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"userMessageReceived('%@')", message] waitUntilDone:NO];
 }
 
 - (void) remoteClientStatusChanged: (NSNotification*) n
@@ -385,10 +389,8 @@
     
     s = (SHKNotification*) [n object];
     status = (NSString*)s.Value;
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self writeJavascript:[NSString stringWithFormat:@"remoteClientStatusChanged('%@')", status]];
-    });
+    
+    [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"remoteClientStatusChanged('%@')", status] waitUntilDone:NO];
 }
 
 
