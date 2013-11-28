@@ -12,6 +12,12 @@ var ShowKit = {
     }
     ,
     
+    registerSubscriber: function (callBack, username, password)
+    {
+        cordova.exec(callBack,callBack,"ShowKitPlugin","registerSubscriber",[username, password]);
+    }
+    ,
+    
     login: function (username, password)
     {
         cordova.exec(null,null,"ShowKitPlugin","login",[username, password]);
@@ -27,6 +33,11 @@ var ShowKit = {
     initiateCallWithUser: function (username)
     {
         cordova.exec(null,null,"ShowKitPlugin","initiateCallWithUser",[username]);
+    }
+    ,
+    initiateCallWithSubscriber: function (username)
+    {
+        cordova.exec(null,null,"ShowKitPlugin","initiateCallWithSubscriber",[username]);
     }
     ,
     

@@ -65,7 +65,9 @@
             
             function makeCall(){
                 var username = "20."+document.forms["call_form"]["username"].value;
-                ShowKit.initiateCallWithUser(username);
+                
+//                ShowKit.initiateCallWithUser(username); //Deprecated
+                  ShowKit.initiateCallWithSubscriber(username); //new
             }
             
             function getState(){

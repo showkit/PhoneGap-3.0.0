@@ -49,7 +49,7 @@
             function register(){
                 var username = document.forms["login_form"]["username"].value;
                 var password = document.forms["login_form"]["pwd"].value;
-                ShowKit.registerUser(function(value){
+                ShowKit.registerSubscriber(function(value){
                                      var username = value[0];
                                      var error = value[1];
                                      if (error == null){

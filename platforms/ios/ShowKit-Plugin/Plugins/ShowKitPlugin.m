@@ -179,6 +179,36 @@
     }
 }
 
+- (void)registerSubscriber:(CDVInvokedUrlCommand*)command
+{
+    NSString *username = (NSString *)[command.arguments objectAtIndex:0];
+    NSString *password = (NSString *)[command.arguments objectAtIndex:1];
+    
+    if([username length] > 0 && [password length] > 0)
+    {
+        __block CDVPluginResult* pluginResult = nil;
+        
+        [ShowKit registerSubscriber:username
+                     password:password
+                       apiKey:API_KEY
+          withCompletionBlock:^(NSString *username, NSError *error) {
+              NSArray *result;
+              if(error == nil)
+              {
+                  result = [NSArray arrayWithObjects:username,[NSNull null],nil];
+                  pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:result];
+              }else{
+                  result = [NSArray arrayWithObjects:[NSNull null],error.localizedDescription,nil];
+                  pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsArray:result];
+              }
+              [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+          }];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a username and password" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+}
+
 
 #pragma conference calling methods
 
@@ -192,6 +222,24 @@
         [self.prevVideoUIView setHidden:NO];
         [self.menuUIView setHidden:NO];
         [ShowKit initiateCallWithUser:username];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"hihihi"];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)initiateCallWithSubscriber:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    NSString *username = (NSString *)[command.arguments objectAtIndex:0];
+    if (username != nil) {
+        [ShowKit setState:self.prevVideoUIView forKey:SHKPreviewDisplayViewKey];
+        [self.mainVideoUIView setHidden:NO];
+        [self.prevVideoUIView setHidden:NO];
+        [self.menuUIView setHidden:NO];
+        [ShowKit initiateCallWithSubscriber:username];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"hihihi"];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -338,7 +386,7 @@
     } else if ([value isEqualToString:SHKConnectionStatusNotConnected])
     {
         
-        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%d','%@']))", value,  NULL, NULL, NULL] waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(executeJavascriptOnMainThread:) withObject:[NSString stringWithFormat:@"connectionStateChanged(ShowKit.parseConnectionState(['%@','%@','%@','%@']))", value,  NULL, NULL, NULL] waitUntilDone:NO];
         
     } else if ([value isEqualToString:SHKConnectionStatusLoginFailed])
     {
