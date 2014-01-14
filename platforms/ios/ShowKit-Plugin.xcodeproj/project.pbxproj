@@ -43,6 +43,7 @@
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		D83791311885D24F00085A67 /* ShowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83791301885D24F00085A67 /* ShowKit.framework */; };
 		EFFBC65317A1B12300E92860 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFFBC65217A1B12200E92860 /* OpenGLES.framework */; };
 		EFFBC65517A1B14100E92860 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFFBC65417A1B14100E92860 /* CoreVideo.framework */; };
 		EFFBC65717A1B15900E92860 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFFBC65617A1B15900E92860 /* libresolv.dylib */; };
@@ -112,6 +113,7 @@
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* ShowKit-Plugin-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ShowKit-Plugin-Info.plist"; path = "../ShowKit-Plugin-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		D83791301885D24F00085A67 /* ShowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShowKit.framework; sourceTree = "<group>"; };
 		EFFBC65217A1B12200E92860 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		EFFBC65417A1B14100E92860 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		EFFBC65617A1B15900E92860 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
@@ -129,11 +131,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFFBC65917A1B16400E92860 /* libz.dylib in Frameworks */,
-				EFFBC65717A1B15900E92860 /* libresolv.dylib in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				EFFBC65517A1B14100E92860 /* CoreVideo.framework in Frameworks */,
+				301BF5BD109A6A2B0062928A /* CFNetwork.framework in Frameworks */,
+				301BF5C3109A6A2B0062928A /* QuartzCore.framework in Frameworks */,
 				301BF5BB109A6A2B0062928A /* AVFoundation.framework in Frameworks */,
 				EFFBC65317A1B12300E92860 /* OpenGLES.framework in Frameworks */,
+				EFFBC65917A1B16400E92860 /* libz.dylib in Frameworks */,
+				EFFBC65717A1B15900E92860 /* libresolv.dylib in Frameworks */,
 				301BF5BF109A6A2B0062928A /* CoreLocation.framework in Frameworks */,
 				5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */,
 				5AA0E66D1729F45B000DC89A /* OpenAL.framework in Frameworks */,
@@ -141,16 +146,14 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				301BF5B5109A6A2B0062928A /* AddressBook.framework in Frameworks */,
 				301BF5B7109A6A2B0062928A /* AddressBookUI.framework in Frameworks */,
 				301BF5B9109A6A2B0062928A /* AudioToolbox.framework in Frameworks */,
-				301BF5BD109A6A2B0062928A /* CFNetwork.framework in Frameworks */,
 				301BF5C1109A6A2B0062928A /* MediaPlayer.framework in Frameworks */,
-				301BF5C3109A6A2B0062928A /* QuartzCore.framework in Frameworks */,
 				301BF5C5109A6A2B0062928A /* SystemConfiguration.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */,
+				D83791311885D24F00085A67 /* ShowKit.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +242,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D83791301885D24F00085A67 /* ShowKit.framework */,
 				EFFBC65817A1B16400E92860 /* libz.dylib */,
 				EFFBC65617A1B15900E92860 /* libresolv.dylib */,
 				EFFBC65417A1B14100E92860 /* CoreVideo.framework */,
@@ -505,6 +509,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/xiaowoo/phonegapnew/PhoneGap-3.0.0/platforms/ios",
+					"/Users/nathan/CM/PhoneGap-3.0.0/platforms/ios",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -544,6 +549,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/xiaowoo/phonegapnew/PhoneGap-3.0.0/platforms/ios",
+					"/Users/nathan/CM/PhoneGap-3.0.0/platforms/ios",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShowKit-Plugin/ShowKit-Plugin-Prefix.pch";
