@@ -52,6 +52,12 @@ var ShowKit = {
         cordova.exec(null,null,"ShowKitPlugin","rejectCall",[null]);
     }
     ,
+        
+    hangupCall: function ()
+    {
+        cordova.exec(null,null,"ShowKitPlugin","hangupCall",[null]);
+    }
+    ,
     
     logout: function ()
     {
